@@ -64,7 +64,7 @@ Vagrant::Config.run do |config|
   include httpd
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
-  # path, and data_bags path (all relative to this Vagrantfile), and adding 
+  # path, and data_bags path (all relative to this Vagrantfile), and adding
   # some recipes and/or roles.
   #
   # config.vm.provision :chef_solo do |chef|

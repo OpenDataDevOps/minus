@@ -58,10 +58,10 @@ Vagrant::Config.run do |config|
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "manifests"
     puppet.manifest_file  = "centos-6.3-x84_64-minimal.pp"
+    puppet.module_path = "my_modules"
   end
 
-  config.vm.provision :puppet, :module_path => "my_modules"
-  include httpd
+  #include httpd
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
   # path, and data_bags path (all relative to this Vagrantfile), and adding

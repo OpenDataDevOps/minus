@@ -29,8 +29,8 @@ Vagrant::Config.run do |config|
 
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.
-   config.vm.forward_port 80, 8080
-  config.vm.forward_port 8080, 8111
+  config.vm.forward_port 80, 8080 # for http
+  config.vm.forward_port 8080, 8111 # for tomcat
 
   # Share an additional folder to the guest VM. The first argument is
   # an identifier, the second is the path on the guest to mount the
@@ -58,7 +58,7 @@ Vagrant::Config.run do |config|
 
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "manifests"
-    puppet.manifest_file  = "centos-6.3-x84_64-minimal.pp"
+    puppet.manifest_file  = "manifests.pp"
   end
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles

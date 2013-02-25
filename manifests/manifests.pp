@@ -51,4 +51,19 @@ exec { "disable_iptable2":
   path => "/sbin/",
 }
 
+# add link to /vagrant to document root
+file { '/var/www/html/vagrant':
+  ensure => 'link',
+  target => '/vagrant',
+}
+
+# add index.html file to document root
+file { '/var/www/html/index.html':
+  owner   => vagrant,
+  group   => root,
+  mode    => 775,
+  ensure  => present,
+  source  => "/vagrant/source/httpd/index.html"
+}
+  
 # profit

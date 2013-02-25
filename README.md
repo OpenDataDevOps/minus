@@ -2,7 +2,7 @@ minus
 =====
 
 # About
-Minus is OpenDataDevOps's first virtual machine (aka "vm") targeted to Open Data Developers, Researchers, and Government data publishers.
+Minus is OpenDataDevOps's first virtual machine (aka "vm") targeted to Open Data developers, researchers, and Government data publishers.
 
 Our immediate goal is creating a proof-of-concept "vagrant base box" demonstrating how a ready-to-run "guest" virtual computer can be easily downloaded onto a "host" laptop and be auto-configured with useful software and data in a few minutes.
 

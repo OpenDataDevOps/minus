@@ -22,7 +22,9 @@ Minus started as an Open Data Day event on February 23, 2013 hosted at The World
 
 1. Clone out minus project `git clone git@github.com:OpenDataDevOps/minus.git`
 2. Go into minus directory and boot up the vm (in terminal) `cd minus && vagrant up`
+3. _If Apache configuration reports error on initial `vagrant up`, run `vagrant reload` to correct problem._
 3. Get into the virtual machine (vm) via ssh `vagrant ssh`
+
 
 # Use
 

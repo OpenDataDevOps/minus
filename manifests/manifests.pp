@@ -75,6 +75,7 @@ file { '/var/www/html/index.html':
   source  => "/vagrant/source/httpd/index.html"
 }
 
+# add leiningen for automating Clojure projects without setting your hair on fire
 exec { "curl_lein":
   command => "curl https://raw.github.com/technomancy/leiningen/stable/bin/lein -o /bin/lein",
   path => "/usr/bin/",
@@ -85,6 +86,7 @@ file { "/bin/lein":
   mode  => "0755",
 }
 
+# add drake, a kind of make for data - http://blog.factual.com/introducing-drake-a-kind-of-make-for-data
 exec {
   "curl_drake":
     command => "curl -L https://github.com/Factual/drake/archive/develop.zip -o /tmp/drake.zip",

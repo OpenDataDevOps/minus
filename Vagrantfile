@@ -56,7 +56,7 @@ Vagrant::Config.run do |config|
   # # }
   #
 
-  config.vm.provision :puppet do |puppet|
+  config.vm.provision :puppet, :options => "--verbose" do |puppet|
     puppet.manifests_path = "manifests"
     puppet.manifest_file  = "manifests.pp"
   end

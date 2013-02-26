@@ -32,7 +32,14 @@ Minus started as an Open Data Day event on February 23, 2013 hosted at The World
 2. `http://localhost:8080` in your host computer browser brings up the Apache-served pages from your minus guest vm.
 3. `http://localhost:8111` in your host computer browser brings up the Tomcat-served pages from your minus guest vm.
 
+# What's Installed
+
+- Apache2 web server and index.html page stub, so you can start serving web pages.
+- Java and Tomcat, so don't need to figure out how to install Java.
+- Drake (a kind of make for data), so you can define reproducable data preparation sequences.
+
 # Other Commands
+
 * `vagrant halt` stops the minus guest vm.
 * `vagrant reload` re-runs the configuration (and applies changes in the vagrant manifest) to the minus guest vm without re-establishing the base box.
 * `vagrant destroy` blows away the minus guest vm and let's you start all over again. Just. Like. That!

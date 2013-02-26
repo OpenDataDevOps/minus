@@ -4,6 +4,15 @@ file { "/etc/passwd":
       mode  => "0644",
     }
 
+# install git -- may not need this for drake, will use zip instead
+#package { "git-all":
+#  ensure => installed;
+#}
+
+package { "unzip":
+  ensure => installed;
+}
+
 # install apache/httpd
 package { "httpd":
   ensure => installed;
@@ -65,5 +74,34 @@ file { '/var/www/html/index.html':
   ensure  => present,
   source  => "/vagrant/source/httpd/index.html"
 }
-  
+
+exec { "curl_lein":
+  command => "curl https://raw.github.com/technomancy/leiningen/stable/bin/lein -o /bin/lein",
+  path => "/usr/bin/",
+  creates => "/bin/lein",
+}
+
+file { "/bin/lein":
+  mode  => "0755",
+}
+
+exec {
+  "curl_drake":
+    command => "curl -L https://github.com/Factual/drake/archive/develop.zip -o /tmp/drake.zip",
+    path => "/usr/bin/",
+    creates => "/tmp/drake.zip";
+
+  "unzip_drake":
+    cwd => "/opt",
+    command => "/usr/bin/unzip /tmp/drake.zip",
+    creates => "/opt/drake-develop",
+    require => [ Package["unzip"], Exec["curl_drake"] ];
+
+  "build_drake":
+    cwd => "/opt/drake-develop",
+    command => "/bin/lein uberjar",
+    require => [ Exec["unzip_drake"] ];
+
+}
+
 # profit

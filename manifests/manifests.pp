@@ -4,14 +4,15 @@ file { "/etc/passwd":
       mode  => "0644",
     }
 
-# install git -- may not need this for drake, will use zip instead
-#package { "git-all":
+# install git
+package { "git":
+  ensure=> installed;
+}
+
+# Using git to install Drake
+#package { "unzip":
 #  ensure => installed;
 #}
-
-package { "unzip":
-  ensure => installed;
-}
 
 # install apache/httpd
 package { "httpd":
@@ -88,22 +89,24 @@ file { "/bin/lein":
 
 # add drake, a kind of make for data - http://blog.factual.com/introducing-drake-a-kind-of-make-for-data
 exec {
-  "curl_drake":
-    command => "curl -L https://github.com/Factual/drake/archive/develop.zip -o /tmp/drake.zip",
-    path => "/usr/bin/",
-    creates => "/tmp/drake.zip";
 
-  "unzip_drake":
-    cwd => "/opt",
-    command => "/usr/bin/unzip /tmp/drake.zip",
-    creates => "/opt/drake-develop",
-    require => [ Package["unzip"], Exec["curl_drake"] ];
+"fetch_drake":
+    command => "git clone https://github.com/Factual/drake.git /opt/drake",
+    path => "/usr/bin/",
+    require => [ Package["git"] ];
 
   "build_drake":
-    cwd => "/opt/drake-develop",
+    cwd => "/opt/drake",
     command => "/bin/lein uberjar",
-    require => [ Exec["unzip_drake"] ];
+    require => [  Exec["fetch_drake"], Exec["curl_lein"] ];
+}
 
+file { '/bin/drake':
+  owner   => root,
+  group   => root,
+  mode    => 775,
+  ensure  => present,
+  source  => "/vagrant/source/script/drake"
 }
 
 # profit

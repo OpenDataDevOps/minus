@@ -95,7 +95,7 @@ exec {
     path => "/usr/bin/",
     require => [ Package["git"] ];
 
-  "build_drake":
+"build_drake":
     cwd => "/opt/drake",
     command => "/bin/lein uberjar",
     require => [  Exec["fetch_drake"], Exec["curl_lein"] ];
